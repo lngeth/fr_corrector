@@ -7,7 +7,7 @@ on:
     branches: [main]
 
 jobs:
-  test:
+  build-and-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -45,3 +45,24 @@ jobs:
         run: |
           docker stop test_api
           docker rm test_api
+  
+  push-to-registry:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    environment: Dev
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GHCR_PAT }}
+
+      - name: Build and tag image
+        run: docker build -t ghcr.io/${{ github.repository }}/corrector_api:${{ github.sha }} corrector_api/
+
+      - name: Push image
+        run: docker push ghcr.io/${{ github.repository }}/corrector_api:${{ github.sha }}
