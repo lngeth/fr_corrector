@@ -22,7 +22,20 @@ jobs:
       - name: Run container
         run: |
           docker run -d --name test_api -p 8000:8000 corrector_api:latest
-          sleep 5
+      
+      - name: Wait for API to be ready
+        run: |
+          for i in {1..60}; do
+            if curl -s http://localhost:8000/health > /dev/null; then
+              echo "API is up!"
+              exit 0
+            fi
+            echo "Waiting for API..."
+            sleep 1
+          done
+          echo "API failed to start"
+          docker logs test_api
+          exit 1
 
       - name: Run tests inside container
         run: docker exec test_api pytest corrector_api/tests
