@@ -1,6 +1,6 @@
 from fastapi import APIRouter
-from models import TextRequest
-from services.text_correction import correct_text
+from corrector_api.models import TextRequest
+from corrector_api.services.text_correction import correct_text
 
 router = APIRouter()
 

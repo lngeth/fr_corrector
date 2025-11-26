@@ -1,6 +1,6 @@
 from fastapi import FastAPI
-from models import TextRequest
-from routers import grammar, api_health
+from corrector_api.models import TextRequest
+from corrector_api.routers import grammar, api_health
 
 title = "French Corrector API"
 description = "API that use LLM from HuggingFace to correct spelling mistakes in French texts."
