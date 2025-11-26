@@ -38,7 +38,8 @@ jobs:
           exit 1
 
       - name: Run tests inside container
-        run: docker exec test_api pytest corrector_api/tests
+        run: |
+          docker exec test_api bash -c "PYTHONPATH=. pytest corrector_api/tests"
 
       - name: Stop container
         run: |

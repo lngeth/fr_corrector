@@ -1,8 +1,8 @@
 services:
   api:
-    build: corrector_api/.
+    build: corrector_api/
     volumes:
-      - ./corrector_api/:/app
+      - ./corrector_api:/app/corrector_api
     ports:
       - "8000:8000"
-    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+    command: uvicorn corrector_api.main:app --host 0.0.0.0 --port 8000 --reload
