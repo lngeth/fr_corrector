@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: corrector-api-ingress
+  namespace: default
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+  - host: corrector.local
+    http:
+      paths:
+      - path: /health
+        pathType: Prefix
+        backend:
+          service:
+            name: corrector-api
+            port:
+              number: 8000

@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: corrector-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: corrector-api
+  template:
+    metadata:
+      labels:
+        app: corrector-api
+    spec:
+      containers:
+        - name: corrector-api
+          image: ghcr.io/lngeth/fr_corrector/corrector_api:70a2d426eae76727399ca39f0cc677d958e611c6
+          ports:
+            - containerPort: 8000
+      imagePullSecrets:
+        - name: ghcr-secret
