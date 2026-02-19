@@ -1,2 +1,3 @@
 .venv/
 corrector_api/__pycache__/
+corrector_api/model/

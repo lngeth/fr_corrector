@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: corrector-api
-          image: ghcr.io/lngeth/fr_corrector/corrector_api:70a2d426eae76727399ca39f0cc677d958e611c6
+          image: ghcr.io/lngeth/fr_corrector/corrector_api:7eb71c7756e193864f654a66029b86243dd902a8
           ports:
             - containerPort: 8000
       imagePullSecrets:

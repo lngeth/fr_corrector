@@ -1,6 +1,7 @@
 from happytransformer import HappyTextToText, TTSettings
 
-happy_tt = HappyTextToText("T5", "fdemelo/t5-base-spell-correction-fr")
+# Charger depuis le dossier local
+happy_tt = HappyTextToText("T5", "./corrector_api/model")
 args = TTSettings(num_beams=5, min_length=1)
 
 def correct_text(text: str) -> str:
