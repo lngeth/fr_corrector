@@ -25,16 +25,18 @@ jobs:
       
       - name: Wait for API to be ready
         run: |
-          for ($i=0; $i -lt 60; $i++) {
-            if (docker exec test_api curl -s http://localhost:8000/health) {
-              Write-Host "API is up!"
+          for i in {1..60}; do
+            if docker exec test_api curl -s http://localhost:8000/health; then
+              echo "API is up!"
               exit 0
-            }
-            Write-Host "Waiting for API..."
-            Start-Sleep -Seconds 5
-          }
+            fi
+            echo "Waiting for API..."
+            sleep 5
+          done
+
+          # If we reach here, API didn't start
           docker logs test_api
-          Write-Error "API failed to start"
+          echo "API failed to start"
           exit 1
 
       - name: Run tests inside container
