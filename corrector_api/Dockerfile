@@ -18,4 +18,6 @@ RUN pip install --no-cache-dir -r requirements.txt --extra-index-url https://dow
 
 COPY . /app/corrector_api/
 
+RUN python corrector_api/download_model.py
+
 CMD ["uvicorn", "corrector_api.main:app", "--host", "0.0.0.0", "--port", "8000"]
