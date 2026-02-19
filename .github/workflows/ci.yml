@@ -23,6 +23,8 @@ jobs:
         run: |
           docker run -d --name test_api -p 8000:8000 corrector_api:latest
           docker logs -f test_api
+          pwd
+          ls
       
       - name: Wait for API to be ready
         run: |
